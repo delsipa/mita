@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Koperasi Sekolah</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2e7d32 0%, #a5d6a7 50%, #fff59d 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 400px;
+            border-top: 6px solid #2e7d32;
+        }
+
+        .header-title {
+            text-align: center;
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #2e7d32;
+            border-bottom: 3px solid #2e7d32;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #2e7d32;
+            box-shadow: 0 0 5px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #fff176;
+            color: #1b5e20;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #ffee58;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-box {
+            display: none;
+        }
+
+        .form-box.active {
+            display: block;
+        }
+
+        .error-msg {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="header-title">Koperasi Sekolah</h2>
+
+    <div class="tab-buttons">
+        <button class="tab-btn active" id="btnTabLogin" onclick="showForm('login')">Login</button>
+        <button class="tab-btn" id="btnTabDaftar" onclick="showForm('daftar')">Daftar</button>
+    </div>
+
+    <div id="errorMessage" class="error-msg"></div>
+
+    <!-- Form Login -->
+    <form id="loginForm" class="form-box active" onsubmit="handleLogin(event)">
+        <div class="form-group">
+            <label for="loginUser">Username / NIS</label>
+            <input type="text" id="loginUser" required placeholder="Masukkan username atau NIS">
+        </div>
+        <div class="form-group">
+            <label for="loginPass">Password</label>
+            <input type="password" id="loginPass" required placeholder="Masukkan password">
+        </div>
+        <button type="submit" class="btn-submit">Masuk ke Koperasi</button>
+    </form>
+
+    <!-- Form Daftar -->
+    <form id="daftarForm" class="form-box" onsubmit="handleDaftar(event)">
+        <div class="form-group">
+            <label for="namaLengkap">Nama Lengkap</label>
+            <input type="text" id="namaLengkap" required placeholder="Nama lengkap siswa">
+        </div>
+        <div class="form-group">
+            <label for="daftarUser">Username / NIS</label>
+            <input type="text" id="daftarUser" required placeholder="Buat username atau NIS">
+        </div>
+        <div class="form-group">
+            <label for="daftarPass">Password</label>
+            <input type="password" id="daftarPass" required placeholder="Buat password baru">
+        </div>
+        <button type="submit" class="btn-submit">Daftar Akun</button>
+    </form>
+</div>
+
+<script>
+    const errorMsg = document.getElementById('errorMessage');
+
+    function showForm(formType) {
+        errorMsg.style.display = 'none';
+        const loginForm = document.getElementById('loginForm');
+        const daftarForm = document.getElementById('daftarForm');
+        const btnTabLogin = document.getElementById('btnTabLogin');
+        const btnTabDaftar = document.getElementById('btnTabDaftar');
+
+        if (formType === 'login') {
+            loginForm.classList.add('active');
+            daftarForm.classList.remove('active');
+            btnTabLogin.classList.add('active');
+            btnTabDaftar.classList.remove('active');
+        } else {
+            daftarForm.classList.add('active');
+            loginForm.classList.remove('active');
+            btnTabDaftar.classList.add('active');
+            btnTabLogin.classList.remove('active');
+        }
+    }
+
+    // Prosedur Pendaftaran Akun
+    function handleDaftar(event) {
+        event.preventDefault();
+
+        const nama = document.getElementById('namaLengkap').value;
+        const user = document.getElementById('daftarUser').value;
+        const pass = document.getElementById('daftarPass').value;
+
+        // Simpan data akun ke LocalStorage
+        const userData = { nama: nama, username: user, password: pass };
+
+        localStorage.setItem('koperasiUser_' + user, JSON.stringify(userData));
+
+        alert('Pendaftaran berhasil! Silahkan login dengan akun Anda.');
+
+        // Reset form daftar dan alihkan ke tab login
+        document.getElementById('daftarForm').reset();
+        showForm('login');
+    }
+
+    // Prosedur Login Akun & Validasi
+    function handleLogin(event) {
+        event.preventDefault();
+
+        const user = document.getElementById('loginUser').value;
+        const pass = document.getElementById('loginPass').value;
+
+        // Ambil data akun berdasarkan username
+        const savedUser = localStorage.getItem('koperasiUser_' + user);
+
+        if (!savedUser) {
+            showError('Username tidak ditemukan! Silahkan daftar terlebih dahulu.');
+            return;
+        }
+
+        const parsedUser = JSON.parse(savedUser);
+
+        // Cek apakah password cocok
+        if (parsedUser.password === pass) {
+            // Simpan sesi login aktif
+            localStorage.setItem('sessionUser', JSON.stringify(parsedUser));
+            window.location.href = 'index.html';
+        } else {
+            showError('Password salah! Akses ditolak.');
+        }
+    }
+
+    function showError(message) {
+        errorMsg.innerText = message;
+        errorMsg.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

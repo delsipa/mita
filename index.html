@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Cooperative</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar */
+        nav {
+            background: linear-gradient(to right, #fcd34d, #f97316);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+            color: #000;
+            text-transform: lowercase;
+            line-height: 1.1;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background-color: #bef264;
+            border-radius: 60px;
+            padding: 30px 40px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .hero-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .hero-title {
+            font-weight: bold;
+            font-size: 24px;
+            text-align: left;
+        }
+
+        .hero-ig {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #111827;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Section Title */
+        .section-title {
+            background-color: #bef264;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            background-color: #84cc16;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 4px solid #65a30d;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .product-price {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .btn-pesan {
+            background: linear-gradient(to right, #fcd34d, #ea580c);
+            color: #000;
+            border: none;
+            padding: 8px 0;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .btn-pesan:hover {
+            opacity: 0.9;
+        }
+
+        /* Styling Tutorial Pemesanan */
+        .tutorial-box {
+            background-color: #fef08a;
+            border: 2px dashed #f59e0b;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+
+        /* Styling Banner DM Instagram di Bawah Produk */
+        .ig-banner-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .ig-banner-btn {
+            display: block;
+            background: linear-gradient(to right, #fcd34d, #f97316);
+            color: #000;
+            text-decoration: none;
+            padding: 18px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .ig-banner-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+        }
+
+        /* Container & Tombol Logout Paling Bawah */
+        .logout-footer-container {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 2px dashed #a5d6a7;
+        }
+
+        .btn-logout-red {
+            background-color: #d32f2f;
+            color: #ffffff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-logout-red:hover {
+            background-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            school<br>cooperative
+        </div>
+        <div class="nav-links">
+            <a href="#beranda">Beranda</a>
+            <a href="#produk">produk</a>
+            <a href="#produk">pesan</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Beranda / Hero Section -->
+        <section id="beranda" class="hero">
+            <div class="hero-header">
+                <div class="hero-title">school<br>cooperative</div>
+                <div class="hero-ig">085188448252<br>(no rek)</div>
+            </div>
+            <p class="hero-desc">
+                Kami menyediakan layanan pembelian seragam sekolah resmi secara praktis, cepat, dan terpercaya. Mulai dari seragam harian, batik, hingga pakaian olahraga, semua kebutuhan busana sekolah siswa dapat dipesan langsung melalui dm ke instagram kami dengan cara pilih baju yang akan di pesan lalu klik tombol pesan dan lihat lagi tutorial untuk selanjutnya.
+            </p>
+        </section>
+
+        <!-- Product Section -->
+        <div class="section-title">Product Grid ("mhc")</div>
+
+        <section id="produk" class="product-grid">
+            <!-- 1. Seragam Abu Cewe -->
+            <div class="product-card">
+                <img src="seragam abu cewe.jpeg" alt="Seragam Abu Cewe" class="product-img">
+                <div class="product-title">seragam abu cewe</div>
+                <div class="product-price">150.000</div>
+                <button class="btn-pesan" onclick="kirimIG('seragam abu cewe')">salin rincian</button>
+            </div>
+
+            <!-- 2. Putih Cowo -->
+            <div class="product-card">
+                <img src="putih cowo.jpeg" alt="Putih Cowo" class="product-img">
+                <div class="product-title">putih cowo</div>
+                <div class="product-price">150.000</div>
+                <button class="btn-pesan" onclick="kirimIG('putih cowo')">salin rincian</button>
+            </div>
+
+            <!-- 3. Jas -->
+            <div class="product-card">
+                <img src="jas.jpeg" alt="Jas" class="product-img">
+                <div class="product-title">jas</div>
+                <div class="product-price">200.000</div>
+                <button class="btn-pesan" onclick="kirimIG('jas')">salin rincian</button>
+            </div>
+
+            <!-- 4. Batik -->
+            <div class="product-card">
+                <img src="batik.jpeg" alt="Batik" class="product-img">
+                <div class="product-title">batik</div>
+                <div class="product-price">150.000</div>
+                <button class="btn-pesan" onclick="kirimIG('batik')">salin rincian</button>
+            </div>
+
+            <!-- 5. Seragam Pramuka -->
+            <div class="product-card">
+                <img src="seragam pramuka.jpeg" alt="Seragam Pramuka" class="product-img">
+                <div class="product-title">seragam pramuka</div>
+                <div class="product-price">200.000</div>
+                <button class="btn-pesan" onclick="kirimIG('seragam pramuka')">salin rincian</button>
+            </div>
+
+            <!-- 6. Olga Cewe -->
+            <div class="product-card">
+                <img src="olga cewe.jpeg" alt="Olga Cewe" class="product-img">
+                <div class="product-title">olga cewe</div>
+                <div class="product-price">170.000</div>
+                <button class="btn-pesan" onclick="kirimIG('olga cewe')">salin rincian</button>
+            </div>
+
+            <!-- 7. Olga Cowo -->
+            <div class="product-card">
+                <img src="olga cowo.jpeg" alt="Olga Cowo" class="product-img">
+                <div class="product-title">olga cowo</div>
+                <div class="product-price">170.000</div>
+                <button class="btn-pesan" onclick="kirimIG('olga cowo')">salin rincian</button>
+            </div>
+
+            <!-- 8. Jurusan Laki Laki -->
+            <div class="product-card">
+                <img src="jurusan laki laki.jpeg" alt="Jurusan Laki Laki" class="product-img">
+                <div class="product-title">jurusan laki laki</div>
+                <div class="product-price">200.000</div>
+                <button class="btn-pesan" onclick="kirimIG('jurusan laki laki')">salin rincian</button>
+            </div>
+
+            <!-- 9. Celana Abu -->
+            <div class="product-card">
+                <img src="celana abu.jpeg" alt="Celana Abu" class="product-img">
+                <div class="product-title">celana abu</div>
+                <div class="product-price">100.000</div>
+                <button class="btn-pesan" onclick="kirimIG('celana abu')">salin rincian</button>
+            </div>
+
+            <!-- 10. Androk Abu -->
+            <div class="product-card">
+                <img src="androk abu.jpeg" alt="Androk Abu" class="product-img">
+                <div class="product-title">androk abu</div>
+                <div class="product-price">100.000</div>
+                <button class="btn-pesan" onclick="kirimIG('androk abu')">salin rincian</button>
+            </div>
+
+            <!-- 11. Dasi -->
+            <div class="product-card">
+                <img src="dasi.jpeg" alt="Dasi" class="product-img">
+                <div class="product-title">dasi</div>
+                <div class="product-price">25.000</div>
+                <button class="btn-pesan" onclick="kirimIG('dasi')">salin rincian</button>
+            </div>
+
+            <!-- 12. Ikat Pinggang -->
+            <div class="product-card">
+                <img src="ikat pinggang.jpeg" alt="Ikat Pinggang" class="product-img">
+                <div class="product-title">ikat pinggang</div>
+                <div class="product-price">30.000</div>
+                <button class="btn-pesan" onclick="kirimIG('ikat pinggang')">salin rincian</button>
+            </div>
+        </section>
+
+        <!-- Tutorial / Instruksi Pemesanan -->
+        <div class="tutorial-box">
+            Setelah klik pesan, silakan Anda klik pesanan via DM di bawah ini lalu paste/tempel. 
+            Kemudian kalian isi rincian data yang harus diisi. Terima kasih!
+        </div>
+        
+        <!-- Link Pemesanan via DM Instagram di Paling Bawah Produk -->
+        <div class="ig-banner-container">
+            <a href="https://ig.me/m/smkmhc_clk" target="_blank" class="ig-banner-btn">
+                Link Pemesanan via DM (@smkmhc_clk)
+            </a>
+        </div>
+        
+        <!-- Tombol Logout Paling Bawah Web -->
+        <div class="logout-footer-container">
+            <button class="btn-logout-red" onclick="handleLogout()">Logout dari Akun</button>
+        </div>
+    </div>
+    
+    <!-- JavaScript (Bisa dipindah ke script.js jika ingin dipisah) -->
+    <script>
+        // Check Autentikasi Sesi Login
+        const activeSession = localStorage.getItem('sessionUser');
+        if (!activeSession) {
+            alert('Anda belum login! Silakan login terlebih dahulu.');
+            window.location.href = 'login.html';
+        }
+
+        // Fungsi Logout
+        function handleLogout() {
+            const konfirmasi = confirm('Apakah Anda yakin ingin keluar?');
+            if (konfirmasi) {
+                localStorage.removeItem('sessionUser');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Username IG yang disesuaikan
+        const usernameIG = "smkmhc_clk";
+
+        function kirimIG(namaProduk) {
+            // Format Pesan dengan backtick yang benar
+            const text = `FORMAT PESANAN\nnama:\nkelas:\npesanan: ${namaProduk}\npieces:\ntransaksi:`;
+            
+            // Proses Salin Teks dan Buka DM IG
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert(`Format pesanan untuk "${namaProduk}" sudah disalin!\n\nSilakan tinggal PASTE / TEMPEL di kolom chat Instagram.`);
+                    window.open(`https://ig.me/m/${usernameIG}`, '_blank');
+                }).catch(() => {
+                    window.open(`https://ig.me/m/${usernameIG}`, '_blank');
+                });
+            } else {
+                // Fallback untuk browser lama
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert(`Format pesanan untuk "${namaProduk}" sudah disalin!\n\nSilakan tinggal PASTE / TEMPEL di kolom chat Instagram.`);
+                window.open(`https://ig.me/m/${usernameIG}`, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
